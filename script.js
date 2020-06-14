@@ -14,7 +14,9 @@ function divide(a, b) {
     return a/b;
 }
 
-function operate(sign, a, b) {
+function operate(a, b, sign="+") {
+    a = Number(a);
+    b = Number(b);
     switch (sign) {
         case "+":
             return add(a, b);
@@ -26,3 +28,11 @@ function operate(sign, a, b) {
             return divide(a, b);
     }
 }
+
+function digitPressed (e) {
+    console.log(e.explicitOriginalTarget.value);
+}
+
+const display = document.querySelector('#display');
+const digits = Array.from(document.querySelectorAll('.digit'));
+digits.forEach(digit => digit.addEventListener('click', digitPressed));
