@@ -66,6 +66,7 @@ function operatorPressed (e) {
 function enterPressed (e) {
     if (numberInMemory, currentSign, newNumber) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
+        console.log(numberInMemory);
         display.textContent = numberInMemory;
         displaySign.textContent = '=';
         currentSign = null;
@@ -81,7 +82,6 @@ function clearPressed (e) {
     currentSign = null;
 }
 
-let result = null;
 let newNumber = null;
 let currentSign = null;
 let numberInMemory = null;
