@@ -29,6 +29,14 @@ function operate(a, b, sign="+") {
     }
 }
 
+function display (number) {
+    displayArea.textContent = Number(number).toPrecision(16);
+}
+
+function displaySign (sign) {
+    displaySignArea.textContent = sign;
+}
+
 function digitPressed (e) {
     if (!currentSign) {
         if (numberInMemory) {
@@ -37,7 +45,7 @@ function digitPressed (e) {
         } else {
             numberInMemory = Number(e.explicitOriginalTarget.value);
         }
-        display.textContent = numberInMemory;
+        display(numberInMemory);
     } else {
         if (newNumber) {
             newNumber *= 10;
@@ -45,21 +53,21 @@ function digitPressed (e) {
         } else {
             newNumber = Number(e.explicitOriginalTarget.value);
         }
-        display.textContent = newNumber;
+        display(newNumber);
     }
 }
 
 function operatorPressed (e) {
     if (numberInMemory, currentSign, newNumber) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
-        display.textContent = numberInMemory;
         currentSign = e.explicitOriginalTarget.value;
-        displaySign.textContent = currentSign;
+        displaySign(currentSign);
+        display(numberInMemory);
         newNumber = null;
     }
     if (numberInMemory) {
         currentSign = e.explicitOriginalTarget.value;
-        displaySign.textContent = currentSign;
+        displaySign(currentSign);
     }
 }
 
@@ -67,16 +75,16 @@ function enterPressed (e) {
     if (numberInMemory, currentSign, newNumber) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
         console.log(numberInMemory);
-        display.textContent = numberInMemory;
-        displaySign.textContent = '=';
+        display(numberInMemory);
+        displaySign('=');
         currentSign = null;
         newNumber = null;
     }
 }
 
 function clearPressed (e) {
-    display.textContent = 0;
-    displaySign.textContent = 'CLEAR';
+    display(0);
+    displaySign('CLEAR');
     numberInMemory = null;
     newNumber = null;
     currentSign = null;
@@ -86,8 +94,8 @@ let newNumber = null;
 let currentSign = null;
 let numberInMemory = null;
 
-const displaySign = document.querySelector('#sign');
-const display = document.querySelector('#display');
+const displaySignArea = document.querySelector('#sign');
+const displayArea = document.querySelector('#display');
 
 const digits = Array.from(document.querySelectorAll('.digit'));
 digits.forEach(digit => digit.addEventListener('click', digitPressed));
