@@ -111,7 +111,7 @@ function enterPressed () {
 
 function clearPressed () {
     display(0);
-    displaySign('CLEAR');
+    displaySign('CLR');
     decimalMode = false;
     numberInMemory = null;
     newNumber = null;
