@@ -30,9 +30,25 @@ function operate(a, b, sign="+") {
 }
 
 function digitPressed (e) {
-    console.log(e.explicitOriginalTarget.value);
+    if (!currentSign) {
+        digitInMemory = Number(e.explicitOriginalTarget.value);
+        display.textContent = digitInMemory;
+    }
 }
 
+function operatorPressed (e) {
+    if (digitInMemory !== null) {
+        digitInMemory = Number(e.explicitOriginalTarget.value);
+        display.textContent = digitInMemory;
+    }
+}
+
+let currentSign = null;
+let digitInMemory = null;
 const display = document.querySelector('#display');
+
 const digits = Array.from(document.querySelectorAll('.digit'));
 digits.forEach(digit => digit.addEventListener('click', digitPressed));
+
+const operators = Array.from(document.querySelectorAll('.operator'));
+operators.forEach(operator => operator.addEventListener('click', operatorPressed));
