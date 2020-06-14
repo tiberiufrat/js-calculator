@@ -4,15 +4,23 @@ html, body {
 }
 
 #calculator {
+    background-color: lightgoldenrodyellow;
+    padding: 1em;
+    border-radius: 2em;
     position: relative;
     text-align: center;
 }
 
 #sign, #display {
-    font-size: 1.3em;
+    font-size: 1.6em;
+    padding-bottom: 1.5vh;
+    padding-top: 1.5vh;
+    border-radius: 0.5em;
+    background-color: lightgray;
 }
 
 .button {
+    border-radius: 0.5em;
     height: 5em;
     width: 5em;
     border-style: ridge;
