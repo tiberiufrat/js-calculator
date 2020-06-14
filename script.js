@@ -1,36 +1,17 @@
-function add() {
-    var args = Array.prototype.slice.call(arguments);
-    var result = 0;
-    args.forEach(argument => {
-        result += argument;
-    });
-    return result;
+function add(a, b) {
+    return a+b;
 }
 
-function subtract() {
-    var args = Array.prototype.slice.call(arguments);
-    var result = args.shift();
-    args.forEach(argument => {
-        result -= argument;
-    });
-    return result;
+function subtract(a, b) {
+    return a-b;
 }
 
-function multiply() {
-    var args = Array.prototype.slice.call(arguments);
-    var result = 1;
-    args.forEach(argument => {
-        result *= argument;
-    });
-    return result;
+function multiply(a, b) {
+    return a*b;
 }
 
-function divide() {
-    var args = Array.prototype.slice.call(arguments);
-    var result = args.shift();
-    args.forEach(argument => {
-        result /= argument;
-    });
-    return result;
+function divide(a, b) {
+    return a/b;
 }
 
+function operate(a, b)
