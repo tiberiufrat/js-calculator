@@ -31,10 +31,20 @@ function operate(a, b, sign="+") {
 
 function digitPressed (e) {
     if (!currentSign) {
-        numberInMemory = Number(e.explicitOriginalTarget.value);
+        if (numberInMemory) {
+            numberInMemory *= 10;
+            numberInMemory += Number(e.explicitOriginalTarget.value);
+        } else {
+            numberInMemory = Number(e.explicitOriginalTarget.value);
+        }
         display.textContent = numberInMemory;
     } else {
-        newNumber = Number(e.explicitOriginalTarget.value);
+        if (newNumber) {
+            newNumber *= 10;
+            newNumber += Number(e.explicitOriginalTarget.value);
+        } else {
+            newNumber = Number(e.explicitOriginalTarget.value);
+        }
         display.textContent = newNumber;
     }
 }
@@ -51,6 +61,8 @@ function enterPressed (e) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
         display.textContent = numberInMemory;
         displaySign.textContent = '=';
+        currentSign = null;
+        newNumber = null;
     }
 }
 
