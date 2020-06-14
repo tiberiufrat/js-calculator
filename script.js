@@ -14,4 +14,15 @@ function divide(a, b) {
     return a/b;
 }
 
-function operate(a, b)
+function operate(sign, a, b) {
+    switch (sign) {
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*":
+            return multiply(a, b);
+        case "/":
+            return divide(a, b);
+    }
+}
