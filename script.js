@@ -50,6 +50,13 @@ function digitPressed (e) {
 }
 
 function operatorPressed (e) {
+    if (numberInMemory, currentSign, newNumber) {
+        numberInMemory = operate(numberInMemory, newNumber, currentSign);
+        display.textContent = numberInMemory;
+        currentSign = e.explicitOriginalTarget.value;
+        displaySign.textContent = currentSign;
+        newNumber = null;
+    }
     if (numberInMemory) {
         currentSign = e.explicitOriginalTarget.value;
         displaySign.textContent = currentSign;
