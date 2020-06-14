@@ -5,6 +5,11 @@ html, body {
 
 #calculator {
     position: relative;
+    text-align: center;
+}
+
+#sign, #display {
+    font-size: 1.3em;
 }
 
 .button {
@@ -28,9 +33,9 @@ td[colspan="2"] > .button {
 }
 
 .digit {
-    background-color: cornflowerblue;
+    background-color: lightblue;
 }
 
 .operator {
-    background-color: cornsilk;
+    background-color: gold;
 }
