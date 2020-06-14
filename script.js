@@ -29,11 +29,16 @@ function operate(a, b, sign="+") {
     }
 }
 
+function countDecimals (value) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split(".")[1].length || 0;
+}
+
 function display (number) {
-    if (number > 9e19) {
-        displayArea.textContent = Number(number).toPrecision(15);
+    if (number.toString().length > 9) {
+        displayArea.textContent = Number(number).toExponential(5);
     } else {
-        displayArea.textContent = Math.round((Number(number) + Number.EPSILON) * 10000) / 10000;
+        displayArea.textContent = Math.round((Number(number) + Number.EPSILON) * 10e8) / 10e8;
     }
 }
 
@@ -42,26 +47,43 @@ function displaySign (sign) {
 }
 
 function digitPressed (e) {
+    var pressedNumber = Number(e.explicitOriginalTarget.value);
     if (!currentSign) {
         if (numberInMemory) {
-            numberInMemory *= 10;
-            numberInMemory += Number(e.explicitOriginalTarget.value);
+            if (!decimalMode) {
+                numberInMemory *= 10;
+                numberInMemory += pressedNumber;
+            } else {
+                var multiplier = Math.pow(10, (countDecimals(numberInMemory)+1));
+                console.log(multiplier);
+                numberInMemory *= multiplier;
+                numberInMemory += pressedNumber;
+                numberInMemory /= multiplier;
+            }
         } else {
-            numberInMemory = Number(e.explicitOriginalTarget.value);
+            numberInMemory = pressedNumber;
         }
         display(numberInMemory);
     } else {
         if (newNumber) {
-            newNumber *= 10;
-            newNumber += Number(e.explicitOriginalTarget.value);
+            if (!decimalMode) {
+                newNumber *= 10;
+                newNumber += pressedNumber;
+            } else {
+                var multiplier = Math.pow(10, (countDecimals(numberInMemory)+1));
+                newNumber *= multiplier;
+                newNumber += pressedNumber;
+                newNumber /= multiplier;
+            }
         } else {
-            newNumber = Number(e.explicitOriginalTarget.value);
+            newNumber = pressedNumber;
         }
         display(newNumber);
     }
 }
 
 function operatorPressed (e) {
+    decimalMode = false;
     if (numberInMemory, currentSign, newNumber) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
         currentSign = e.explicitOriginalTarget.value;
@@ -75,7 +97,8 @@ function operatorPressed (e) {
     }
 }
 
-function enterPressed (e) {
+function enterPressed () {
+    decimalMode = false;
     if (numberInMemory, currentSign, newNumber) {
         numberInMemory = operate(numberInMemory, newNumber, currentSign);
         console.log(numberInMemory);
@@ -86,14 +109,20 @@ function enterPressed (e) {
     }
 }
 
-function clearPressed (e) {
+function clearPressed () {
     display(0);
     displaySign('CLEAR');
+    decimalMode = false;
     numberInMemory = null;
     newNumber = null;
     currentSign = null;
 }
 
+function decimalPressed (e) {
+    decimalMode = true;
+}
+
+let decimalMode = false;
 let newNumber = null;
 let currentSign = null;
 let numberInMemory = null;
@@ -112,3 +141,6 @@ enter.addEventListener('click', enterPressed);
 
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clearPressed);
+
+const decimal = document.querySelector('#decimal');
+decimal.addEventListener('click', decimalPressed);
