@@ -66,6 +66,14 @@ function enterPressed (e) {
     }
 }
 
+function clearPressed (e) {
+    display.textContent = 0;
+    displaySign.textContent = 'CLEAR';
+    numberInMemory = null;
+    newNumber = null;
+    currentSign = null;
+}
+
 let result = null;
 let newNumber = null;
 let currentSign = null;
@@ -82,3 +90,6 @@ operators.forEach(operator => operator.addEventListener('click', operatorPressed
 
 const enter = document.querySelector('#enter');
 enter.addEventListener('click', enterPressed);
+
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', clearPressed);
