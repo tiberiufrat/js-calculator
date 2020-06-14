@@ -1,0 +1,15 @@
+.button {
+    height: 6em;
+    width: 6em;
+    background-color: white;
+    border-style: ridge;
+}
+
+.button:active {
+    border-style: inset;
+    background-color: white;
+}
+
+td[rowspan="2"] > .button {
+    height: 12.5em;
+}
