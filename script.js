@@ -30,7 +30,11 @@ function operate(a, b, sign="+") {
 }
 
 function display (number) {
-    displayArea.textContent = Number(number).toPrecision(16);
+    if (number > 9e19) {
+        displayArea.textContent = Number(number).toPrecision(15);
+    } else {
+        displayArea.textContent = Math.round((Number(number) + Number.EPSILON) * 10000) / 10000;
+    }
 }
 
 function displaySign (sign) {
